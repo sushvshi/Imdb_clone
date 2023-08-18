@@ -2,9 +2,6 @@
 document.addEventListener('load', ()=>{
     updateTask();
 })
-/**
- * Get the DOM elements for toggle button, sidebar, flex-box, searchbar, dbObjectFavList, and dbLastInput
- */
 
  const toggleButton = document.getElementById("toggle-sidebar");
  const sidebar = document.getElementById("sidebar");
@@ -12,22 +9,12 @@ document.addEventListener('load', ()=>{
  const searchbar = document.getElementById('search-bar');
 
 
- 
-/**
- * Check and initialize the local storage items for favorite list 
- */
-
-
  const dbObjectFavList = "favMovieList";
  if (localStorage.getItem(dbObjectFavList) == null) {
     localStorage.setItem(dbObjectFavList, JSON.stringify([]));
 }
  
-
-
-/**
- * Update the task counter with the current number of items in the favorite list.
-*/
+//updating favourite numbers/
 function updateTask() {
     const favCounter = document.getElementById('total-counter');
     const db = JSON.parse(localStorage.getItem(dbObjectFavList));
@@ -38,14 +25,7 @@ function updateTask() {
 }
 
 
-/**
- * Check if an ID is in a list of favorites
- *
- * @param list The list of favorites
- * @param id The ID to check
- * @return true if the ID is in the list, false otherwise
- */
-
+//if movie exist in favourite list //
  function isFav(list, id) {
     let res = false;
     for (let i = 0; i < list.length; i++) {
@@ -57,23 +37,11 @@ function updateTask() {
 }
 
 
-
-/**************************** Some Usefull Utility Function***************************** */
-
- /**
-  * It return truncated string greater then 50
-  * @param {*} str 
-  * @param {*} n 
-  * @returns 
-  */
 function truncate(str, n) {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;
 }
 
-/**
- * Generates a random character string starting 
- * @returns {string} The generated string
- */
+
  function generateOneCharString() {
     var possible = "abcdefghijklmnopqrstuvwxyz";
     return possible.charAt(Math.floor(Math.random() * possible.length));
@@ -81,12 +49,7 @@ function truncate(str, n) {
 
 
 
-/**
- * Function to toggle the sidebar and display the list of favorite movies.
- * When the toggle button is clicked, the sidebar is shown or hidden and the list of favorite movies is displayed.
- * The flexBox class is also toggled to adjust the layout of the page.
- * 
-*/
+//to show and hide favourite list //
 toggleButton.addEventListener("click", function () {
     showFavMovieList();
     sidebar.classList.toggle("show");
@@ -94,14 +57,7 @@ toggleButton.addEventListener("click", function () {
 });
 
 
-/**
- * 
- * This function adds an event listener to the toggle button that when clicked, it calls the showFavMovieList function and adds or removes the "show" class to the sidebar element and "shrink" class to the flexBox element, respectively.
- * @event toggleButton - The button element that when clicked, triggers the event listener.
- * @function showFavMovieList - The function that is called when the toggle button is clicked. It populates the fav element with the list of favorite movies.
- * @element sidebar - The sidebar element that has the "show" class added or removed.
- * @element flexBox - The flexbox element that has the "shrink" class added or removed.
-*/
+//to stick search box at top while scrolling//
 
 flexBox.onscroll = function () {
 
@@ -114,14 +70,7 @@ flexBox.onscroll = function () {
 };
 
 
-/**
- * Fetch movies from API
- * 
- * @param {string} url - The base URL for the API
- * @param {string} value - The value to append to the URL for filtering the results
- * 
- * @returns {Promise} A promise that resolves to the JSON data of the movies
- */
+//fetching movies from api//
 
 const fetchMoviesFromApi = async (url, value) => {
     const response = await fetch(`${url + value}`);
@@ -129,16 +78,7 @@ const fetchMoviesFromApi = async (url, value) => {
     return movies;
 }
 
-
-/**
- * showMovieList - function to show movie list based on search input
- * 
- * @returns {void} 
- * 
- * This function first retrieves the data from local storage and then it fetches the movies data from API 
- * using the fetchMoviesFromApi function. It then maps over the movies data and creates the HTML template 
- * for each movie. This HTML template is then added to the DOM.
- */
+//showing movie list based on search //
 
 async function showMovieList() {
     const list = JSON.parse(localStorage.getItem(dbObjectFavList));
@@ -169,7 +109,7 @@ async function showMovieList() {
             </div>
             <div class="card-bottom">
                 <div class="like">
-<Strong> Add to Favoruite: </Strong>
+<Strong> Add to Favorite: </Strong>
                 <i class="fa-solid fa-star ${isFav(list, element.imdbID) ? 'active' : ''} " onclick="addRemoveToFavList('${element.imdbID}')"></i>
                 
                 </div>
@@ -183,15 +123,7 @@ async function showMovieList() {
 }
 
 
-
-/**
- * addRemoveToFavList - function to add or remove a movie from the favorite list
- * 
- * @param {string} id - The id of the movie to be added or removed
- *
- * This function first retrieves the data from local storage and then it checks if the provided movie id already exist in the favorite list.
- * If it exists, it removes it from the list, otherwise it adds it to the list. It then updates the local storage and updates the UI.
- */
+//add or remove the movie from favorite list //
 
 function addRemoveToFavList(id) {
     const detailsPageLikeBtn = document.getElementById('like-button');
@@ -223,14 +155,7 @@ function addRemoveToFavList(id) {
     updateTask();
 }
 
-
-/**
- * Show details for a specific movie
- * @async
- * @function
- * @param {string} itemId - The ID of the movie to show details for
- * @param {string} searchInput - The search input used to fetch the related movies
- */
+//showing up movie details //
  
 async function showMovieDetails(itemId, searchInput) {
     console.log("searchInput:...............", searchInput);
@@ -332,7 +257,7 @@ async function showMovieDetails(itemId, searchInput) {
                 </div>
                 <div class="card-bottom">
                 <div class="like">
-<Strong> Add to Favoruite: </Strong>
+<Strong> Add to Favorite: </Strong>
                 <i class="fa-solid fa-star ${isFav(list, element.imdbID) ? 'active' : ''} " onclick="addRemoveToFavList('${element.imdbID}')"></i>
                 
                 </div>
@@ -351,22 +276,10 @@ async function showMovieDetails(itemId, searchInput) {
 
 
 
-/**
 
-This function is used to show all the movies which are added to the favourite list.
+//This function is used to show all the movies which are added to the favorite list.//
 
-@function
 
-@async
-
-@returns {string} html - This returns html which is used to show the favourite movies.
-
-@throws {Error} If there is no favourite movie then it will show "Nothing To Show....."
-
-@example
-
-showFavMovieList()
-*/
 async function showFavMovieList() {
     let favList = JSON.parse(localStorage.getItem(dbObjectFavList));
     let url = "https://www.omdbapi.com/?apikey=7b6b319d&i=";
@@ -411,5 +324,5 @@ async function showFavMovieList() {
 
 
 updateTask();
-/************************************** End Of the Code ****************************************** */
+
 
