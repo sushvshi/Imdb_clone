@@ -202,12 +202,6 @@ body {
 
 }
 
-
-
-
-/*********************************** test*****************/
-
-
 #fav {
     display: flex;
     flex-direction: column;
@@ -284,9 +278,6 @@ body {
     font-size: .8rem;
     text-decoration: none;
 }
-
-
-
 
 
 .background-image {
@@ -477,9 +468,6 @@ body {
     height: 180px;
     width: 100%;
     object-fit: cover;
-
-    /* border: solid 1px red; */
-
 
 }
 
