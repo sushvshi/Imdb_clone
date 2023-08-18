@@ -293,8 +293,6 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* object-position: left; */
-
     filter: blur(12px);
     -webkit-filter: blur(12px);
 }
@@ -333,7 +331,6 @@ body {
     font-weight: bold;
     letter-spacing: 10px;
     text-align: center;
-    /* text-shadow: 3px -2px 5px hsl(234, 84%, 46%); */
 
 }
 
@@ -357,12 +354,9 @@ body {
     width: 40%;
     height: 40px;
     background-color: transparent;
-    /* background-color: rgba(21, 19, 31, 0.35); */
     transition: all ease-in-out .25s;
     border-radius: 35px;
-
-
-
+    
 }
 
 
@@ -530,13 +524,6 @@ body {
     transition: all .25s;
     opacity: 1;
 }
-
-/* 
-
-.card:hover img {
-    transform: scale(1.1);
-    transition: ease-in-out all .25s;
-} */
 
 .like {
     flex: 1;
